@@ -1,4 +1,4 @@
-package com.aivle.writerswalk.entity;
+package com.aivle.writerswalk.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Book {
 
@@ -30,12 +31,18 @@ public class Book {
     @Column(length = 256)
     private String thumbnailUrl; // AI 표지 URL
 
-    @Column(nullable = false)
-    private String writer; // 책 작성자
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user; // 책 작성자
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt; // 작성일
 
     @UpdateTimestamp
     private LocalDateTime updatedAt; // 수정일
+
+    public void updateThumbnailUrl(String url) {
+        this.thumbnailUrl = url;
+    }
 }
