@@ -19,7 +19,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 256)
-    private String loginId; // 로그인 ID
+    private String email; // 로그인 ID
 
     @Column(nullable = false)
     private String password; // 비밀번호
