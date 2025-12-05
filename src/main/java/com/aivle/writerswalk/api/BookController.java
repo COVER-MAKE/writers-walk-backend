@@ -24,7 +24,7 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping
-    @Operation(summary = "도서 등록", description = "로그인한 사용자가 새 도서를 등록합니다.")
+    @Operation(summary = "도서 등록", description = "로그인한 사용자가 새 도서를 등록합니다. \"장르 (NOVEL, FANTASY, ESSAY, POETRY, HISTORY, SCIENCE)\"")
     public ApiResponse<BookResponse> createBook(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestBody BookCreateRequest request
