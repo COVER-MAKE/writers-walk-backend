@@ -16,31 +16,37 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // 책 key
+    private Long id;
 
     @Column(nullable = false, length = 300)
-    private String title; // 책 제목
+    private String title;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String content; // 책 내용
+    private String content;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Genre genre; // 책 장르 (ENUM)
+    private Genre genre;
 
     @Column(length = 256)
-    private String thumbnailUrl; // AI 표지 URL
+    private String thumbnailUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user; // 책 작성자
+    private User user;
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdAt; // 작성일
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime updatedAt; // 수정일
+    private LocalDateTime updatedAt;
+
+    public void update(String title, String content, Genre genre) {
+        this.title = title;
+        this.content = content;
+        this.genre = genre;
+    }
 
     public void updateThumbnailUrl(String url) {
         this.thumbnailUrl = url;
