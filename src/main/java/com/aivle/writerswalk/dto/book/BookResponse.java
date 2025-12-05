@@ -7,6 +7,7 @@ import lombok.Getter;
 public class BookResponse {
 
     private Long id;
+    private String email;
     private String title;
     private String content;
     private String thumbnailUrl;
@@ -15,6 +16,7 @@ public class BookResponse {
     public BookResponse(Book book) {
         this.id = book.getId();
         this.title = book.getTitle();
+        this.email = book.getUser().getEmail();
         this.content = book.getContent();
         this.thumbnailUrl = book.getThumbnailUrl();
         this.genre = book.getGenre().name();
