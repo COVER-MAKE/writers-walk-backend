@@ -23,7 +23,7 @@ public class ApiResponse<T> {
         return new ApiResponse<>(HttpStatus.NO_CONTENT.value(), "success noContent", null);
     }
 
-    public static ApiResponse<Void> error(String message, int status) {
+    public static <T> ApiResponse<T> error(String message, int status) {
         return new ApiResponse<>(status, message, null);
     }
 }
