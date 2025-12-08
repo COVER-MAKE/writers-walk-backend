@@ -10,6 +10,7 @@ import com.aivle.writerswalk.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import com.aivle.writerswalk.domain.Genre;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -92,5 +93,18 @@ public class BookService {
     private User getUser(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new CustomException("로그인 정보가 유효하지 않습니다.", HttpStatus.UNAUTHORIZED));
+    }
+    // ---------------------------------------------
+// 🔍 장르별 조회
+// ---------------------------------------------
+    public List<Book> getBooksByGenre(Genre genre) {
+        return bookRepository.findByGenre(genre);
+    }
+
+    // ---------------------------------------------
+// 🔍 검색 기능 (제목 + 내용)
+// ---------------------------------------------
+    public List<Book> searchBooks(String keyword) {
+        return bookRepository.findByTitleContainingOrContentContaining(keyword, keyword);
     }
 }
