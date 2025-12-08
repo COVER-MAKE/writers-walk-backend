@@ -2,7 +2,7 @@ spring:
   application:
     name: writers-walk-backend
   datasource:
-    url: jdbc:h2:mem:writerswalk;MODE=MYSQL;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:file:./data/writerswalk;MODE=MYSQL;DB_CLOSE_DELAY=-1
     driver-class-name: org.h2.Driver
     username: sa
     password:
