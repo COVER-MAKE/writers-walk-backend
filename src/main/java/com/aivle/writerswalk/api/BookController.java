@@ -3,6 +3,7 @@ package com.aivle.writerswalk.api;
 import com.aivle.writerswalk.ApiResponse;
 import com.aivle.writerswalk.domain.Book;
 import com.aivle.writerswalk.domain.Genre;
+import com.aivle.writerswalk.dto.book.BookCoverUpdateRequest;
 import com.aivle.writerswalk.dto.book.BookCreateRequest;
 import com.aivle.writerswalk.dto.book.BookResponse;
 import com.aivle.writerswalk.dto.book.BookUpdateRequest;
@@ -109,6 +110,17 @@ public class BookController {
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         bookService.deleteBook(id, userDetails.getUsername());
+        return ApiResponse.success(null);
+    }
+
+    @PutMapping("/{id}/cover-url")
+    @Operation(summary = "썸네일 이미지 등록", description = "AI가 생성한 이미지 URL을 저장합니다.")
+    public ApiResponse<Void> updateCoverUrl(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody BookCoverUpdateRequest request
+    ) {
+        bookService.updateCoverUrl(id, request.getThumbnailUrl(), userDetails.getUsername());
         return ApiResponse.success(null);
     }
 }

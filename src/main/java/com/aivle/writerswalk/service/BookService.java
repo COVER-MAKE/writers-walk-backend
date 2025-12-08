@@ -11,16 +11,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.aivle.writerswalk.domain.Genre;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BookService {
 
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public Book createBook(
             BookCreateRequest request,
             String userEmail
@@ -36,6 +39,7 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    @Transactional
     public Book updateBook(
             Long id,
             BookUpdateRequest request,
@@ -52,6 +56,12 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    @Transactional
+    public void updateCoverUrl(Long id, String imageUrl, String userEmail) {
+        Book book = getOwnedBook(id, userEmail);
+        book.updateThumbnailUrl(imageUrl); // Book 엔티티에 이 메서드가 있어야 함
+    }
+
     public Book getBook(Long id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new CustomException("해당 책을 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
@@ -61,6 +71,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    @Transactional
     public void deleteBook(
             Long id,
             String userEmail
