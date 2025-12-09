@@ -28,7 +28,7 @@ public class Book {
     @Column(nullable = false)
     private Genre genre;
 
-    @Column(length = 256)
+    @Column(columnDefinition = "TEXT")
     private String thumbnailUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)

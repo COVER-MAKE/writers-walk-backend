@@ -59,7 +59,7 @@ public class BookService {
     @Transactional
     public void updateCoverUrl(Long id, String imageUrl, String userEmail) {
         Book book = getOwnedBook(id, userEmail);
-        book.updateThumbnailUrl(imageUrl); // Book 엔티티에 이 메서드가 있어야 함
+        book.updateThumbnailUrl(imageUrl);
     }
 
     public Book getBook(Long id) {
