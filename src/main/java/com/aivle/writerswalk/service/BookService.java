@@ -22,6 +22,7 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
+    private final FileStorageService fileStorageService;
 
     @Transactional
     public Book createBook(
@@ -57,9 +58,21 @@ public class BookService {
     }
 
     @Transactional
-    public void updateCoverUrl(Long id, String imageUrl, String userEmail) {
+    public void updateCoverUrl(
+            Long id,
+            String dalleImageUrl,
+            String userEmail
+    ) {
         Book book = getOwnedBook(id, userEmail);
-        book.updateThumbnailUrl(imageUrl);
+
+        String savedFileName = fileStorageService.storeFileFromUrl(dalleImageUrl);
+
+        if (savedFileName != null) {
+            String permanentImageUrl = "/images/" + savedFileName;
+
+            book.updateThumbnailUrl(permanentImageUrl);
+        } else {
+        }
     }
 
     public Book getBook(Long id) {
