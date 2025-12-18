@@ -9,8 +9,12 @@ phases:
       - echo "Gradle 빌드 시작..."
       - chmod +x gradlew
       - ./gradlew clean build -x test
+  post_build:
+    commands:
+      - echo "JAR 파일을 밖으로 꺼냅니다..."
+      - mv build/libs/*.jar .
 artifacts:
   files:
-    - build/libs/*.jar
+    - "*.jar"
     - appspec.yml
     - scripts/**
