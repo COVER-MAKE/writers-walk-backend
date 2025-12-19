@@ -16,6 +16,6 @@ JAR_FILE=$(ls *.jar)
 
 echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
 
-nohup java -jar -Dspring.profiles.active=prod $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
+nohup java -Dspring.profiles.active=prod -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
 
 echo "$TIME_NOW > 실행 완료" >> $DEPLOY_LOG
