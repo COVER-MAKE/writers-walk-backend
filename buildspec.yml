@@ -12,6 +12,7 @@ phases:
   post_build:
     commands:
       - echo "JAR 파일을 밖으로 꺼냅니다..."
+      - rm -f build/libs/*-plain.jar
       - mv build/libs/*.jar .
 artifacts:
   files:
