@@ -16,6 +16,10 @@ JAR_FILE=$(ls *.jar)
 
 echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
 
-nohup java -Dspring.profiles.active=prod -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
+nohup java -Dspring.profiles.active=prod \
+  -Dspring.datasource.url="$RDS_URL" \
+  -Dspring.datasource.username="$RDS_USERNAME" \
+  -Dspring.datasource.password="$RDS_PASSWORD" \
+  -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
 
 echo "$TIME_NOW > 실행 완료" >> $DEPLOY_LOG
