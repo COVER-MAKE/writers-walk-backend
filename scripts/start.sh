@@ -1,14 +1,22 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
-echo "=== DEBUGGING START ==="
-ls -al /etc/systemd/system/writerswalk.service || echo ">>> [ERROR] Service file is MISSING at destination!"
+echo "[start] waiting for env + jar"
 
-ls -al /home/ubuntu/writerswalk.service || echo ">>> [WARNING] Source file not found in deployment root"
-echo "=== DEBUGGING END ==="
+# env/jar가 생성될 때까지 잠깐 대기 (최대 120초)
+for i in {1..120}; do
+  if [[ -f /etc/writerswalk.env && -f /home/ubuntu/app.jar ]]; then
+    break
+  fi
+  sleep 1
+done
 
-echo "Reload systemd and restart writerswalk"
+ls -al /etc/writerswalk.env /home/ubuntu/app.jar
+
+echo "[start] reload + restart"
 systemctl daemon-reload
+systemctl reset-failed writerswalk || true
 systemctl enable writerswalk || true
 systemctl restart writerswalk
-systemctl status writerswalk --no-pager
+
+systemctl --no-pager status writerswalk
