@@ -19,3 +19,4 @@ artifacts:
     - app.jar
     - appspec.yml
     - scripts/**
+    - writerswalk.service
