@@ -1,25 +1,7 @@
 #!/bin/bash
-PROJECT_ROOT="/home/ubuntu/app"
-JAR_FILE=$(ls $PROJECT_ROOT/*.jar)
+set -e
 
-APP_LOG="$PROJECT_ROOT/application.log"
-ERROR_LOG="$PROJECT_ROOT/error.log"
-DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
-
-TIME_NOW=$(date +%c)
-
-cd $PROJECT_ROOT
-
-source /home/ubuntu/env.sh
-
-JAR_FILE=$(ls *.jar)
-
-echo "$TIME_NOW > $JAR_FILE 파일 실행" >> $DEPLOY_LOG
-
-nohup java -Dspring.profiles.active=prod \
-  -Dspring.datasource.url="$RDS_URL" \
-  -Dspring.datasource.username="$RDS_USERNAME" \
-  -Dspring.datasource.password="$RDS_PASSWORD" \
-  -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
-
-echo "$TIME_NOW > 실행 완료" >> $DEPLOY_LOG
+echo "Reload systemd and restart writerswalk"
+systemctl daemon-reload
+systemctl restart writerswalk
+systemctl status writerswalk --no-pager
