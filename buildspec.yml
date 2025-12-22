@@ -4,15 +4,18 @@ phases:
   install:
     runtime-versions:
       java: corretto17
-
   build:
     commands:
       - chmod +x gradlew
       - ./gradlew clean build -x test
-
   post_build:
     commands:
       - mv build/libs/app.jar .
+
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'
+    - '/root/.gradle/wrapper/**/*'
 
 artifacts:
   files:
