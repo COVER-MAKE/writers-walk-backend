@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: app.jar
-    destination: /home/ubuntu/app
+    destination: /home/ubuntu/
     overwrite: true
 
 hooks:
