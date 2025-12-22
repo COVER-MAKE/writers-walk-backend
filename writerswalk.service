@@ -1,0 +1,15 @@
+[Unit]
+Description=WritersWalk Backend
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+EnvironmentFile=/etc/writerswalk.env
+ExecStart=/usr/bin/java -Dspring.profiles.active=prod -jar /home/ubuntu/app.jar
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -5,6 +5,9 @@ files:
   - source: app.jar
     destination: /home/ubuntu/
     overwrite: true
+  - source: writerswalk.service
+    destination: /etc/systemd/system/
+    overwrite: true
 
 hooks:
   ApplicationStop:
