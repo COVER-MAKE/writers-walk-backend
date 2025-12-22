@@ -56,7 +56,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-                "http://localhost:5174",
+                "http://localhost:5173",
                 "http://team0204-prod-website.s3-website-us-east-1.amazonaws.com",
                 "https://jinybook.site",
                 "https://www.jinybook.site",
