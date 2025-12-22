@@ -41,4 +41,9 @@ public class TestController {
         testService.triggerException();
         return ApiResponse.success(null);
     }
+
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "OK";
+    }
 }
