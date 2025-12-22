@@ -16,3 +16,13 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+
+server:
+  servlet:
+    session:
+      cookie:
+        same-site: None
+        secure: true
+        http-only: true
+        path: /
+        domain: jinybook.site
