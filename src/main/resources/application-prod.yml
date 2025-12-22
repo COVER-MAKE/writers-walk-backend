@@ -1,16 +1,4 @@
 spring:
-  data:
-    redis:
-      host: ${REDIS_HOST}
-      port: ${REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:}
-      ssl:
-        enabled: ${REDIS_SSL}
-
-  session:
-    store-type: redis
-    redis:
-      namespace: writerswalk:session
   datasource:
     url: ${RDS_URL}
     username: ${RDS_USERNAME}
