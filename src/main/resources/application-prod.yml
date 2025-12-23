@@ -26,4 +26,4 @@ server:
         secure: true
         http-only: true
         path: /
-        domain: .jinybook.site
+        domain: jinybook.site
