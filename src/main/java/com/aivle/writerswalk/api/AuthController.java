@@ -82,6 +82,10 @@ public class AuthController {
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         new SecurityContextLogoutHandler().logout(request, response, authentication);
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
         return ApiResponse.success("로그아웃 성공");
     }
 
